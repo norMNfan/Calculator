@@ -57,6 +57,22 @@ class MainActivity : AppCompatActivity() {
         buttonMultiply.setOnClickListener(opListener)
         buttonPlus.setOnClickListener(opListener)
         buttonMinus.setOnClickListener(opListener)
+
+        buttonNeg.setOnClickListener({view ->
+            val value = newNumber.text.toString()
+            if (value.isEmpty()) {
+                newNumber.setText("-")
+            } else {
+                try {
+                    var doubleValue = value.toDouble()
+                    doubleValue *= -1
+                    newNumber.setText(doubleValue.toString())
+                } catch (e: NumberFormatException) {
+                    // newNumber was "-" or "." so clear it
+                    newNumber.setText("")
+                }
+            }
+        })
     }
 
     private fun performOperation(value: Double, operation: String) {
